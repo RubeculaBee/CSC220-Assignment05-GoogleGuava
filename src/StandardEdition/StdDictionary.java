@@ -1,6 +1,9 @@
 package StandardEdition;
 
-public class StdDictionary
+class StdDictionary
 {
-
+	public static void main(String[] args)
+	{
+		System.out.println(StdEntry.BOOK_NOUN.getDefinition());
+	}
 }
