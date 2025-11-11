@@ -1,7 +1,6 @@
 package StandardEdition;
 
 import java.util.Scanner;
-
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
@@ -9,19 +8,19 @@ class StdDictionary
 {
 	public static void main(String[] args)
 	{
-		Multimap<String, String> dictionary = loadDict();
+		Multimap<String, StdEntry> dictionary = loadDict();
 
 		displayHeader();
 
 		while(true)
-			search();
+			search(dictionary);
 	}
 
-	private static Multimap<String, String> loadDict()
+	private static Multimap<String, StdEntry> loadDict()
 	{
-		Multimap<String, String> dict = ArrayListMultimap.create();	
+		Multimap<String, StdEntry> dict = ArrayListMultimap.create();	
 		for(StdEntry entry : StdEntry.values())
-			dict.put(entry.getWord(), entry.getDefinition());
+			dict.put(entry.getWord().toLowerCase(), entry);
 		return dict;
 	}
 
@@ -32,7 +31,21 @@ class StdDictionary
 		System.out.println();
 	}
 
-	private static void search()
+	private static void search(Multimap<String, StdEntry> dict)
+	{
+		String response;
+		if(dict.containsKey(getInput()))
+		{
+			response = "<Found>";
+		}
+		else response = "<Not Found>";
+
+		System.out.printf("%4s|\n", " ");
+		System.out.printf("%4s %s\n", " ", response);
+		System.out.printf("%4s|\n", " ");
+	}
+
+	private static String getInput()
 	{
 		Scanner input = new Scanner(System.in);
 		String query;
@@ -47,8 +60,6 @@ class StdDictionary
 			System.exit(0);
 		}
 
-		System.out.printf("%4s|\n", " ");
-		System.out.printf("%5s<Not Found>\n", " "); // TODO: Implement searching the dictionary
-		System.out.printf("%4s|\n", " ");
+		return query.toLowerCase();
 	}
 }
