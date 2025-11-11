@@ -33,16 +33,24 @@ class StdDictionary
 
 	private static void search(Multimap<String, StdEntry> dict)
 	{
-		String response;
-		if(dict.containsKey(getInput()))
+		StringBuilder response = new StringBuilder();
+		String input = getInput();
+		if(dict.containsKey(input))
 		{
-			response = "<Found>";
+			dict.get(input).forEach(entry -> 
+			{
+				response.append("    ");
+				response.append(entry.getWord());
+				response.append(": ");
+				response.append(entry.getDefinition());
+				response.append("\n");
+			});
 		}
-		else response = "<Not Found>";
+		else response.append("    <Not Found>\n");
 
-		System.out.printf("%4s|\n", " ");
-		System.out.printf("%4s %s\n", " ", response);
-		System.out.printf("%4s|\n", " ");
+		System.out.println("   |");
+		System.out.printf("%s", response);
+		System.out.println("   |");
 	}
 
 	private static String getInput()
