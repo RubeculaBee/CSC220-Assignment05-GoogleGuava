@@ -29,7 +29,7 @@ enum ProEntry
 	private ProEntry(String[] definitions,Speech... typeOrder) throws DefTypeMismatchException
 	{
 		if(typeOrder.length > definitions.length)
-			throw new DefTypeMismatchException("Definition-Type count mismatch: More Speech Types that Definitions");
+			throw new DefTypeMismatchException("Definition-Type count mismatch: More Speech Types than Definitions");
 		if(typeOrder.length < definitions.length)
 			throw new DefTypeMismatchException("Definition-Type count mismatch: More Definitions than Speech Types");
 
