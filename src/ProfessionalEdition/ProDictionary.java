@@ -4,6 +4,8 @@ import java.util.Scanner;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 
+import ProfessionalEdition.ProEntry.Speech;
+
 class ProDictionary
 {
 	public static void main(String[] args)
@@ -33,19 +35,43 @@ class ProDictionary
 
 	private static void search(Multimap<String, ProEntry> dict)
 	{
-		StringBuilder response = new StringBuilder();
-		String input = getInput();
-		if(dict.containsKey(input))
-		{
-			ProEntry entry = dict.get(input).iterator().next();
-			for(int i = 0; i < entry.getNumDefinitions(); i++)
-				response.append(String.format("    %s [%s] : %s\n", entry.name(), entry.getSpeechType(i), entry.getDefinition(i)));
-		}
-		else response.append("    <Not Found>\n");
-
+		String[] inputParts = getInput().split(" ");
+		String response = constructResponse(inputParts, dict);
+		
 		System.out.println("   |");
 		System.out.printf("%s", response);
 		System.out.println("   |");
+	}
+
+	private static String constructResponse(String[] input, Multimap<String, ProEntry> dict)
+	{
+		StringBuilder response = new StringBuilder();
+
+		if(dict.containsKey(input[0]))
+		{
+			Speech chosenSpeechType = null;
+			if(input.length > 1 && !input[1].equals("distinct"))
+			{
+				chosenSpeechType = getSpeechType(input[1]);
+			}
+
+			ProEntry entry = dict.get(input[0]).iterator().next();
+			for(int i = 0; i < entry.getNumDefinitions(); i++)
+				if(chosenSpeechType == null || chosenSpeechType.equals(entry.getSpeechType(i)))
+					response.append(String.format("    %s [%s] : %s\n", entry.name(), entry.getSpeechType(i), entry.getDefinition(i)));
+		}
+		else response.append("    <Not Found>\n");
+
+		return response.toString();
+	}
+
+	private static Speech getSpeechType(String input)
+	{
+		for(Speech type : Speech.values())
+			if(type.name().equals(input))
+				return type;
+		
+		return Speech.ERR;
 	}
 
 	private static String getInput()
