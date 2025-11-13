@@ -43,7 +43,7 @@ enum ProEntry
 
 	enum Speech
 	{
-		noun, verb, adjective, adverb;
+		noun, verb, adjective, adverb, ERR;
 	}
 
 	private class DefTypeMismatchException extends RuntimeException
