@@ -26,8 +26,13 @@ enum ProEntry
 	private String[] definitions;
 	private Speech[] speechTypeOrder;
 
-	private ProEntry(String[] definitions,Speech... typeOrder)
+	private ProEntry(String[] definitions,Speech... typeOrder) throws DefTypeMismatchException
 	{
+		if(typeOrder.length > definitions.length)
+			throw new DefTypeMismatchException("Definition-Type count mismatch: More Speech Types that Definitions");
+		if(typeOrder.length < definitions.length)
+			throw new DefTypeMismatchException("Definition-Type count mismatch: More Definitions than Speech Types");
+
 		this.definitions = definitions;
 		this.speechTypeOrder = typeOrder;
 	}
@@ -38,5 +43,19 @@ enum ProEntry
 	private enum Speech
 	{
 		NOUN, VERB, ADJECTIVE, ADVERB;
+	}
+
+	private class DefTypeMismatchException extends RuntimeException
+	{
+		private String message;
+
+		private DefTypeMismatchException() {}
+		private DefTypeMismatchException(String message) {this.message = message;}
+
+		@Override
+		public String getMessage()
+		{
+			return message;
+		}
 	}
 }
