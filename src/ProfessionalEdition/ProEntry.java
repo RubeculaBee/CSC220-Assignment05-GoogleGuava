@@ -41,7 +41,7 @@ enum ProEntry
 	public Speech getSpeechType(int index) {return this.speechTypeOrder[index];}
 	public int getNumDefinitions() {return this.definitions.length;}
 
-	private enum Speech
+	enum Speech
 	{
 		noun, verb, adjective, adverb;
 	}
