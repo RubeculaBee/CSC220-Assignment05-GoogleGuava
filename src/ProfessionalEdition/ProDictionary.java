@@ -54,11 +54,17 @@ class ProDictionary
 			{
 				chosenSpeechType = getSpeechType(input[1]);
 			}
-
-			ProEntry entry = dict.get(input[0]).iterator().next();
-			for(int i = 0; i < entry.getNumDefinitions(); i++)
-				if(chosenSpeechType == null || chosenSpeechType.equals(entry.getSpeechType(i)))
-					response.append(String.format("    %s [%s] : %s\n", entry.name(), entry.getSpeechType(i), entry.getDefinition(i)));
+			if(chosenSpeechType != Speech.ERR)
+			{
+				ProEntry entry = dict.get(input[0]).iterator().next();
+				for(int i = 0; i < entry.getNumDefinitions(); i++)
+					if(chosenSpeechType == null || chosenSpeechType.equals(entry.getSpeechType(i)))
+						response.append(String.format("    %s [%s] : %s\n", entry.name(), entry.getSpeechType(i), entry.getDefinition(i)));
+				
+				if(response.length() == 0)
+					response.append("    <Not Found>\n");
+			}
+			else response.append("    <2nd argument must be a part of speech or \"distinct\">\n");
 		}
 		else response.append("    <Not Found>\n");
 
