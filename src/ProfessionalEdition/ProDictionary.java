@@ -52,7 +52,7 @@ class ProDictionary
 			Speech chosenSpeechType = null;
 			if(input.length > 1 && !input[1].equals("distinct"))
 			{
-				chosenSpeechType = getSpeechType(input[1]);
+				chosenSpeechType = chooseSpeechType(input[1]);
 			}
 			if(chosenSpeechType != Speech.ERR)
 			{
@@ -71,7 +71,7 @@ class ProDictionary
 		return response.toString();
 	}
 
-	private static Speech getSpeechType(String input)
+	private static Speech chooseSpeechType(String input)
 	{
 		for(Speech type : Speech.values())
 			if(type.name().equals(input))

@@ -19,7 +19,7 @@ enum ProEntry
 		Speech.noun
 	),
 	CSC220(
-		new String[] {"Ready to create complex data structures.", "Data Structures", "To create data structures."},
+		new String[] {"Ready to create complex data structures.", "Data Structures.", "To create data structures."},
 		Speech.adjective, Speech.noun, Speech.verb
 	);
 
