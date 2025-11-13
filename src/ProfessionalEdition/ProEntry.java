@@ -4,23 +4,23 @@ enum ProEntry
 {
 	Book(
 		new String[] {"A Written work published in printed or electronic form.", "To arrange for someone to have a seat on a plane."},
-		Speech.NOUN, Speech.VERB
+		Speech.noun, Speech.verb
 	),
 	Bookable(
 		new String[] {"Can be ordered in advance."},
-		Speech.ADJECTIVE
+		Speech.adjective
 	),
 	Bookcase(
 		new String[] {"A piece of furniture with shelves."},
-		Speech.NOUN
+		Speech.noun
 	),
 	Bookbinder(
 		new String[] {"A person who fastens the pages of books."},
-		Speech.NOUN
+		Speech.noun
 	),
 	CSC220(
 		new String[] {"Ready to create complex data structures.", "Data Structures", "To create data structures."},
-		Speech.ADJECTIVE, Speech.NOUN, Speech.VERB
+		Speech.adjective, Speech.noun, Speech.verb
 	);
 
 	private String[] definitions;
@@ -43,7 +43,7 @@ enum ProEntry
 
 	private enum Speech
 	{
-		NOUN, VERB, ADJECTIVE, ADVERB;
+		noun, verb, adjective, adverb;
 	}
 
 	private class DefTypeMismatchException extends RuntimeException
