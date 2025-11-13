@@ -86,7 +86,7 @@ class ProDictionary
 		String query;
 
 		System.out.print("Search: ");
-		query = input.nextLine();
+		query = input.nextLine().toLowerCase();
 
 		if(query.equals("!q"))
 		{
@@ -95,6 +95,6 @@ class ProDictionary
 			System.exit(0);
 		}
 
-		return query.toLowerCase();
+		return query;
 	}
 }
