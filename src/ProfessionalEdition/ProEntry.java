@@ -39,6 +39,7 @@ enum ProEntry
 
 	public String getDefinition(int index) {return this.definitions[index];}
 	public Speech getSpeechType(int index) {return this.speechTypeOrder[index];}
+	public int getNumDefinitions() {return this.definitions.length;}
 
 	private enum Speech
 	{
