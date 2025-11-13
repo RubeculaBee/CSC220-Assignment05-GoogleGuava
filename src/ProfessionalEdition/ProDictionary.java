@@ -20,14 +20,14 @@ class ProDictionary
 	{
 		Multimap<String, ProEntry> dict = ArrayListMultimap.create();	
 		for(ProEntry entry : ProEntry.values())
-			dict.put(entry.getWord().toLowerCase(), entry);
+			dict.put(entry.name().toLowerCase(), entry);
 		return dict;
 	}
 
 	private static void displayHeader()
 	{
-		System.out.println("- DICTIONARY 220 JAVA Standard -----");
-		System.out.println("-----      powered by Google Guava -");
+		System.out.println("- DICTIONARY 220 JAVA Professional -----");
+		System.out.println("-----          powered by Google Guava -");
 		System.out.println();
 	}
 
@@ -37,14 +37,9 @@ class ProDictionary
 		String input = getInput();
 		if(dict.containsKey(input))
 		{
-			dict.get(input).forEach(entry -> 
-			{
-				response.append("    ");
-				response.append(entry.getWord());
-				response.append(": ");
-				response.append(entry.getDefinition());
-				response.append("\n");
-			});
+			ProEntry entry = dict.get(input).iterator().next();
+			for(int i = 0; i < entry.getNumDefinitions(); i++)
+				response.append(String.format("    %s [%s] : %s\n", entry.name(), entry.getSpeechType(i), entry.getDefinition(i)));
 		}
 		else response.append("    <Not Found>\n");
 
