@@ -6,6 +6,15 @@ import com.google.common.collect.Multimap;
 
 import ProfessionalEdition.ProEntry.Speech;
 
+/*
+ * File: ProDictionary.java
+ * Date: 11-13-25
+ * By: Robin Lane
+ * 
+ * Description: Loads enums into a multimap dictionary, and allows the user
+ * 				to search through it by word and by part of speech
+ */
+
 class ProDictionary
 {
 	public static void main(String[] args)
@@ -18,6 +27,11 @@ class ProDictionary
 			search(dictionary);
 	}
 
+	/**
+	 * Loads the dictionary with the enums. Unfortunately does not utilise the multimap very well
+	 * Each key only has one value. Whoops!
+	 * @return The multimap in question
+	 */
 	private static Multimap<String, ProEntry> loadDict()
 	{
 		Multimap<String, ProEntry> dict = ArrayListMultimap.create();	
@@ -26,6 +40,9 @@ class ProDictionary
 		return dict;
 	}
 
+	/**
+	 * Displays the *Proffesional* Header
+	 */
 	private static void displayHeader()
 	{
 		System.out.println("- DICTIONARY 220 JAVA Professional -----");
@@ -33,6 +50,10 @@ class ProDictionary
 		System.out.println();
 	}
 
+	/**
+	 * Searchs the dictinoary and pritns the response
+	 * @param dict The multimap to be searched
+	 */
 	private static void search(Multimap<String, ProEntry> dict)
 	{
 		String[] inputParts = getInput().split(" ");
@@ -43,6 +64,12 @@ class ProDictionary
 		System.out.println("   |");
 	}
 
+	/**
+	 * Interprets the users input and constructs a response
+	 * @param input An array of words the user typed
+	 * @param dict The dictionary to be searched
+	 * @return The response. Either a 'not found' message, or the word the user is lookng for.
+	 */
 	private static String constructResponse(String[] input, Multimap<String, ProEntry> dict)
 	{
 		StringBuilder response = new StringBuilder();
@@ -71,6 +98,11 @@ class ProDictionary
 		return response.toString();
 	}
 
+	/**
+	 * Checks to see if the user input a valid part of speech. If not, return the error key
+	 * @param input the part of speech the user entered
+	 * @return The Speech enum corresponding to the user's input, or ERR if none match
+	 */
 	private static Speech chooseSpeechType(String input)
 	{
 		for(Speech type : Speech.values())
@@ -80,6 +112,10 @@ class ProDictionary
 		return Speech.ERR;
 	}
 
+	/**
+	 * Get input from the user, quits if they type !q
+	 * @return What the user typed
+	 */
 	private static String getInput()
 	{
 		Scanner input = new Scanner(System.in);
